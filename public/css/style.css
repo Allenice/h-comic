@@ -9,4 +9,4 @@ ul {
 .comic-list a { display: block; width: 100%; height: 100%; line-height: 40px; color: #333; text-decoration: none; text-indent: 1em;}
 
 .img-list { text-align: center;}
-.img-list img {width: 100%; max-width: 720px;}
+.img-list img {width: 100%; max-width: 720px; min-height: 200px; background-color: #ccc;}

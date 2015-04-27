@@ -75,7 +75,7 @@ router.addRoute('/*', function (req, res, match) {
   var pathname = req.url.split('?')[0],
     url = pathname === '/' ? '/index.html' : pathname,
     ext = url.substr(url.lastIndexOf('.') + 1, url.length),
-    filePath = path.join(__dirname, './public' + url);
+    filePath = path.join(__dirname, './public' + decodeURI(url));
 
   fs.readFile(filePath, function (err, data) {
     if (err) {
@@ -88,7 +88,7 @@ router.addRoute('/*', function (req, res, match) {
       'Content-Type': mimeType
     });
     res.end(data);
-  })
+  });
 });
 
 
