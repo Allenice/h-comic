@@ -10,3 +10,8 @@ ul {
 
 .img-list { text-align: center;}
 .img-list img {width: 100%; max-width: 720px; min-height: 200px; background-color: #ccc;}
+
+.pager { position: fixed; right: 5px; bottom: 5px; height: 40px; line-height: 40px; padding: 0 10px; background-color: rgba(0,0,0,0.5); opacity: 0.5; }
+.pager span { display: inline-block; height: 40px; font-size: 14px; color: #fff; padding: 0 5px;}
+#prev {background-color: #ff3d1d;}
+#next {background-color: #1579ff;}

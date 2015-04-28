@@ -18,18 +18,30 @@ $(function () {
       }
     });
   }
-  
-  var comic = getUrlParam('comic');
+
+  function showPage(page) {
+    var list = data.slice((page-1) * 10, page * 10),
+        html = '';
+    list.forEach(function (item) {
+      html += '<li><img data-src="'+ item +'" src="//:0" /></li>';
+    });
+    $('#img-list').html(html);
+    $('#progress').html(curPage + '/' + pageCount);
+    $(window).scrollTop(0).trigger('scroll');
+    window.localStorage.setItem(comic, page);
+  }
+
+  var comic = getUrlParam('comic'),
+      curPage = parseInt(window.localStorage.getItem(comic)) - 1 || 0,
+      pageCount = 0,
+      data;
   
   $.get('/api/comic/' + comic, function (jsonData) {
-    var html = '';
-    jsonData.data.forEach(function (item) {
-      html += '<li><img data-src="'+ item +'" alt="'+ item +'" src="//:0" /></li>';
-    });
-
-    $('#img-list').html(html);
+    data = jsonData.data;
+    pageCount = Math.ceil(data.length / 10);
+    curPage++;
+    showPage(curPage);
   });
-
 
   var timeId;
   $(window).on('scroll', function() {
@@ -38,5 +50,17 @@ $(function () {
       loadImage();
     }, 300);
   }).trigger('scroll');
+
+  $('#prev').click(function() {
+    if(curPage <= 1) return;
+    curPage--;
+    showPage(curPage);
+  });
+
+  $('#next').click(function() {
+    if(curPage >= 10) return;
+    curPage++;
+    showPage(curPage);
+  });
 
 });
