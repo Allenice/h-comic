@@ -58,7 +58,7 @@ $(function () {
   });
 
   $('#next').click(function() {
-    if(curPage >= 10) return;
+    if(curPage >= Math.ceil(data.length / 10)) return;
     curPage++;
     showPage(curPage);
   });
