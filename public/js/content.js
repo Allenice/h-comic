@@ -23,7 +23,11 @@ $(function () {
     var list = data.slice((page-1) * 10, page * 10),
         html = '';
     list.forEach(function (item) {
-      html += '<li><img data-src="'+ item +'" src="//:0" /></li>';
+      if (item.indexOf('mp4') >= 0) {
+        html += '<li><a href="/video.html?video='+ item +'">'+ item +'</a></li>'
+      } else {
+        html += '<li><img data-src="'+ item +'" src="//:0" /></li>';
+      }
     });
     $('#img-list').html(html);
     $('#progress').html(curPage + '/' + pageCount);
